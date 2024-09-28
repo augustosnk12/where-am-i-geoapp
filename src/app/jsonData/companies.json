@@ -1,0 +1,16 @@
+{
+  "companies": [
+    {
+      "name": "marques",
+      "color": "blue"
+    },
+    {
+      "name": "esus-host",
+      "color": "red"
+    },
+    {
+      "name": "biatic",
+      "color": "green"
+    }
+  ]
+}

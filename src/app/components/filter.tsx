@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import { LiaTimesSolid } from "react-icons/lia";
 import { centroid } from "@turf/turf";
+import { IoMdInformationCircleOutline } from "react-icons/io";
 
 import Toggle from "./toggle";
 import ibgeCities from "../../app/jsonData/ibge-cities.json";
@@ -11,6 +12,7 @@ import { CitiesIBGEProps } from "../interfaces/json";
 import { useGeomapContext } from "../contexts/GeomapContext";
 import { Feature } from "../interfaces/geojson";
 import geojson from "../jsonData/geojson-pernambuco.json";
+import Tooltip from "./tooltip";
 
 export default function Filter() {
   const [displayFiltersBar, setDisplayFiltersBar] = useState(false);
@@ -99,7 +101,12 @@ export default function Filter() {
 
               {/* Marques toggle */}
               <div className="mt-8 flex flex-col gap-2">
-                <div className="text-md font-bold">Marques</div>
+                <div className="flex items-center gap-2">
+                  <div className="text-md font-bold">Marques</div>
+                  <Tooltip content="Ao ativar essa opção, apenas os clientes Marques são exibidos">
+                    <IoMdInformationCircleOutline />
+                  </Tooltip>
+                </div>
 
                 <Toggle
                   isActive={isMarquesActive}

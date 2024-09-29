@@ -1,13 +1,14 @@
-'use client';
+"use client";
 
 import { useMemo } from "react";
 import dynamic from "next/dynamic";
 import Sidebar from "./components/sidebar";
 import Filter from "./components/filter";
 import CardCity from "./components/cardCity";
-import { GeomapProvider } from "./contexts/GeomapContext";
+import { GeomapProvider, useGeomapContext } from "./contexts/GeomapContext";
 
 export default function Home() {
+  const { openCityCardInfo } = useGeomapContext();
   const Map = useMemo(
     () =>
       dynamic(() => import("./components/leaflet-map"), {
@@ -16,6 +17,7 @@ export default function Home() {
       }),
     []
   );
+
   return (
     <div className="flex">
       <GeomapProvider>

@@ -5,28 +5,11 @@ import {
   useState,
   useEffect,
 } from "react";
+import { Places, SelectedCityProps } from "./interfaces";
 
 type GeomapProviderProps = {
   children: ReactNode;
 };
-
-export interface Places {
-  razao_social: string;
-  nome_fantasia?: string;
-  cnpj?: string;
-  cep?: string;
-  logradouro?: string;
-  numero?: number;
-  complemento?: string;
-  bairro?: string;
-  cidade?: string;
-  uf?: string;
-  telefone?: string;
-  latitude: number;
-  longitude: number;
-  isMarques?: boolean;
-  marker_name: string;
-}
 
 interface GeomapContextProps {
   places: Places[];
@@ -38,6 +21,10 @@ interface GeomapContextProps {
   search: string;
   setSearch: (search: string) => void;
   fetchPlaces: ({ search }: FetchPlacesProps) => void;
+  selectedCity: SelectedCityProps;
+  setSelectedCity: (city: SelectedCityProps) => void;
+  openCityCardInfo: boolean;
+  setOpenCityCardInfo: (openCityCardInfo: boolean) => void;
 }
 
 interface FetchPlacesProps {
@@ -53,8 +40,11 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
     -7.87959, -35.447176,
   ]);
   const [search, setSearch] = useState<string>("");
-
   const [selectedPlace, setSelectedPlace] = useState<Places>({} as Places);
+  const [selectedCity, setSelectedCity] = useState<SelectedCityProps>(
+    {} as SelectedCityProps
+  );
+  const [openCityCardInfo, setOpenCityCardInfo] = useState(false);
 
   async function fetchPlaces({
     search,
@@ -65,7 +55,9 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
 
     const filteredPlaces = data.filter((place: Places) => {
       const matchesSearch = search ? place.razao_social.includes(search) : true;
-      const matchesMarques = onlyMarques ? place.marker_name == "marques" : true;
+      const matchesMarques = onlyMarques
+        ? place.marker_name == "marques"
+        : true;
 
       return matchesSearch && matchesMarques;
     });
@@ -89,6 +81,10 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
         search,
         setSearch,
         fetchPlaces,
+        selectedCity,
+        setSelectedCity,
+        openCityCardInfo,
+        setOpenCityCardInfo,
       }}
     >
       {children}

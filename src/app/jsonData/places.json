@@ -15,7 +15,11 @@
     "latitude": -7.88059,
     "longitude": -35.447176,
     "marker_name": "marques",
-    "codigo_municipio_ibge": "2608906"
+    "codigo_municipio_ibge": "2608906",
+    "inicio_contrato": "29-09-2020",
+    "fim_contrato": "29-09-2029",
+    "valor_servico": 100,
+    "descricao_servico": "XPTO-SUS"
   },
   {
     "id": "2",
@@ -33,7 +37,11 @@
     "latitude": -8.0476,
     "longitude": -34.877,
     "marker_name": "marques",
-    "codigo_municipio_ibge": "2611606"
+    "codigo_municipio_ibge": "2611606",
+    "inicio_contrato": "10-01-2022",
+    "fim_contrato": "10-01-2030",
+    "valor_servico": 250,
+    "descricao_servico": "XPTO-SUS"
   },
   {
     "id": "3",
@@ -51,7 +59,11 @@
     "latitude": -9.3983,
     "longitude": -40.5033,
     "marker_name": "biatic",
-    "codigo_municipio_ibge": "2611101"
+    "codigo_municipio_ibge": "2611101",
+    "inicio_contrato": "15-03-2021",
+    "fim_contrato": "15-03-2028",
+    "valor_servico": 300,
+    "descricao_servico": "Software de Gestão Varejo"
   },
   {
     "id": "4",
@@ -69,7 +81,11 @@
     "latitude": -8.1127,
     "longitude": -34.9465,
     "marker_name": "marques",
-    "codigo_municipio_ibge": "2607901"
+    "codigo_municipio_ibge": "2607901",
+    "inicio_contrato": "01-07-2022",
+    "fim_contrato": "01-07-2027",
+    "valor_servico": 400,
+    "descricao_servico": "XPTO-SUS"
   },
   {
     "id": "5",
@@ -87,7 +103,11 @@
     "latitude": -8.2844,
     "longitude": -35.9692,
     "marker_name": "marques",
-    "codigo_municipio_ibge": "2604106"
+    "codigo_municipio_ibge": "2604106",
+    "inicio_contrato": "12-06-2020",
+    "fim_contrato": "12-06-2025",
+    "valor_servico": 600,
+    "descricao_servico": "XPTO-SUS"
   },
   {
     "id": "6",
@@ -104,8 +124,12 @@
     "telefone": "(81) 99555-5555",
     "latitude": -8.2783,
     "longitude": -35.9789,
-    "marker_name": "marques",
-    "codigo_municipio_ibge": "2604106"
+    "marker_name": "biatic",
+    "codigo_municipio_ibge": "2604106",
+    "inicio_contrato": "01-02-2021",
+    "fim_contrato": "01-02-2028",
+    "valor_servico": 450,
+    "descricao_servico": "XPTO-SUS"
   },
   {
     "id": "7",
@@ -123,7 +147,11 @@
     "latitude": -7.8765,
     "longitude": -35.4517,
     "marker_name": "esus-host",
-    "codigo_municipio_ibge": "2608906"
+    "codigo_municipio_ibge": "2608906",
+    "inicio_contrato": "05-11-2019",
+    "fim_contrato": "05-11-2025",
+    "valor_servico": 300,
+    "descricao_servico": "Sistema de Automação de Lanchonetes"
   },
   {
     "id": "8",
@@ -141,7 +169,11 @@
     "latitude": -8.1207,
     "longitude": -34.9157,
     "marker_name": "esus-host",
-    "codigo_municipio_ibge": "2611606"
+    "codigo_municipio_ibge": "2611606",
+    "inicio_contrato": "12-09-2021",
+    "fim_contrato": "12-09-2026",
+    "valor_servico": 700,
+    "descricao_servico": "Software de Gestão de Livrarias"
   },
   {
     "id": "9",
@@ -159,7 +191,11 @@
     "latitude": -8.0089,
     "longitude": -34.8553,
     "marker_name": "marques",
-    "codigo_municipio_ibge": "2609600"
+    "codigo_municipio_ibge": "2609600",
+    "inicio_contrato": "01-08-2020",
+    "fim_contrato": "01-08-2028",
+    "valor_servico": 150,
+    "descricao_servico": "XPTO-SUS"
   },
   {
     "id": "10",
@@ -177,6 +213,10 @@
     "latitude": -8.1627,
     "longitude": -34.9229,
     "marker_name": "marques",
-    "codigo_municipio_ibge": "2607901"
+    "codigo_municipio_ibge": "2607901",
+    "inicio_contrato": "01-03-2021",
+    "fim_contrato": "01-03-2030",
+    "valor_servico": 500,
+    "descricao_servico": "XPTO-SUS"
   }
 ]

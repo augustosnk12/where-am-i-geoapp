@@ -114,6 +114,14 @@ const Map = (Map: MapProps) => {
           key={index}
           position={[place.latitude, place.longitude]}
           icon={createIcon(place.marker_name)}
+          riseOnHover
+          bubblingMouseEvents
+          eventHandlers={{
+            mouseover: (e) => {
+              const marker = e.target;
+              marker.openPopup();
+            },
+          }}
         >
           <Popup>
             <div className="flex flex-col gap-2">

@@ -19,7 +19,7 @@ export default function ClientList({ isSearching }: ClientListProps) {
   }, [isSearching]);
 
   return (
-    <div className="overflow-y-scroll">
+    <div className="overflow-y-scroll no-scrollbar">
       {places.map((item, index) => (
         <div
           key={index}

@@ -17,7 +17,7 @@ import L, { LatLngExpression, LatLngTuple, Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Places, useGeomapContext } from "../../contexts/GeomapContext";
 import { markerIconColor } from "./functions";
 import geojson from "../../jsonData/geojson-pernambuco.json";
@@ -26,6 +26,7 @@ import {
   GeoJSON as GeoJSONProps,
   Properties,
 } from "@/app/interfaces/geojson";
+import CardInformation from "../cardInformation";
 
 interface MarkerData {
   razao_social: string;
@@ -100,6 +101,16 @@ const Map = (Map: MapProps) => {
     return null;
   };
 
+  const [showCard, setShowCard] = useState(false);
+
+  const handleClose = () => {
+    setShowCard(false);
+  };
+
+  const handleOpen = () => {
+    setShowCard(true);
+  };
+
   return (
     <MapContainer
       center={center}
@@ -118,9 +129,24 @@ const Map = (Map: MapProps) => {
           position={[marker.latitude, marker.longitude]}
           icon={createIcon(marker.marker_name)}
         >
-          <Popup>{marker.nome_fantasia}</Popup>
+          <Popup>{marker.nome_fantasia}
+            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-blue-700 transition"
+              onClick={handleOpen}> More</button>
+          </Popup>
         </Marker>
-      ))}
+      ))
+      }
+
+      {
+        showCard && (
+          <CardInformation
+            title="ADA"
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dolor libero, mattis non gravida feugiat, ultrices egestas justo. Aenean quis nulla nisl."
+            imageUrl="https://via.placeholder.com/600x400"  // Aqui você pode usar a URL da imagem que desejar
+            onClose={handleClose}
+          />
+        )
+      }
 
       <MyComponent />
 
@@ -134,7 +160,7 @@ const Map = (Map: MapProps) => {
       />
 
       <RecenterAutomatically {...selectedPlace} />
-    </MapContainer>
+    </MapContainer >
   );
 };
 

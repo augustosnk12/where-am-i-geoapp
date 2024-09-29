@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import dynamic from "next/dynamic";
 import Sidebar from "./components/sidebar";
 import Filter from "./components/filter";
+import CardCity from "./components/cardCity";
 import { GeomapProvider } from "./contexts/GeomapContext";
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
           <Map posix={[4.79029, -35.447176]} />
         </div>
         <Filter />
+        <CardCity />
       </GeomapProvider>
     </div>
   );

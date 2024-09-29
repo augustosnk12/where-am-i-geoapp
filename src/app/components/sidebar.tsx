@@ -36,10 +36,10 @@ export default function Sidebar() {
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center gap-2">
           <Image
-            src="/logo.png"
+            src="/logo-v-2.png"
             alt="logo marques consult"
-            width={50}
-            height={50}
+            width={80}
+            height={80}
           />
           <div
             className={`text-lg font-bold transition-opacity duration-300 ${

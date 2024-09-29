@@ -43,6 +43,8 @@ const Map = (Map: MapProps) => {
     setSelectedPlace,
     setSelectedCity,
     setOpenCityCardInfo,
+    setOpenPlaceInfoModal,
+    openPlaceInfoModal,
   } = useGeomapContext();
 
   const RecenterAutomatically = ({
@@ -64,15 +66,9 @@ const Map = (Map: MapProps) => {
     return null;
   };
 
-  const [showCard, setShowCard] = useState(false);
-
-  const handleClose = () => {
-    setShowCard(false);
-  };
-
   const handleOpen = (place: Places) => {
     setSelectedPlace(place);
-    setShowCard(true);
+    setOpenPlaceInfoModal(true);
   };
 
   const onEachCity = (city: Feature, layer: any) => {
@@ -137,12 +133,7 @@ const Map = (Map: MapProps) => {
         </Marker>
       ))}
 
-      {showCard && (
-        <CardInformation
-          imageUrl="https://via.placeholder.com/600x400"
-          onClose={handleClose}
-        />
-      )}
+      {openPlaceInfoModal && <CardInformation />}
 
       <MyComponent />
 

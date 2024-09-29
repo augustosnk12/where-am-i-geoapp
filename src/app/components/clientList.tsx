@@ -1,31 +1,43 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useGeomapContext } from "../contexts/GeomapContext";
+import CardInformation from "./cardInformation";
 
 interface ClientListProps {
-  isSearching: boolean;
+  isDisplayingFullWidth: boolean;
 }
 
-export default function ClientList({ isSearching }: ClientListProps) {
+export default function ClientList({ isDisplayingFullWidth }: ClientListProps) {
   const [fade, setFade] = useState({ opacity: 0 });
-  const { places, setSelectedPlace } = useGeomapContext();
+  const {
+    places,
+    setSelectedPlace,
+    setOpenPlaceInfoModal,
+    openPlaceInfoModal,
+  } = useGeomapContext();
 
   useEffect(() => {
-    if (isSearching) {
+    if (isDisplayingFullWidth) {
       setFade({ opacity: 1 }); // Fade in
     } else {
       setFade({ opacity: 0 }); // Fade out
     }
-  }, [isSearching]);
+  }, [isDisplayingFullWidth]);
 
   return (
     <div className="overflow-y-scroll no-scrollbar">
       {places.map((item, index) => (
         <div
           key={index}
-          className="flex gap-4 mb-4 cursor-pointer hover:opacity-90"
+          className="flex gap-4 mb-4 hover:opacity-90"
+          style={{
+            cursor: isDisplayingFullWidth ? "pointer" : "default",
+          }}
           onClick={() => {
+            if (!isDisplayingFullWidth) return;
+
             setSelectedPlace(item);
+            setOpenPlaceInfoModal(true);
           }}
         >
           <Image
@@ -36,7 +48,7 @@ export default function ClientList({ isSearching }: ClientListProps) {
             className="rounded-md h-14 mb-6"
           />
 
-          {isSearching && (
+          {isDisplayingFullWidth && (
             <div
               style={{
                 transition: "opacity 0.3s ease-in-out",
@@ -50,7 +62,7 @@ export default function ClientList({ isSearching }: ClientListProps) {
                 }}
                 className="text-lg font-bold"
               >
-                {item.nome_fantasia}
+                {item.razao_social}
               </p>
               <p
                 style={{
@@ -65,6 +77,7 @@ export default function ClientList({ isSearching }: ClientListProps) {
           )}
         </div>
       ))}
+      {openPlaceInfoModal && <CardInformation />}
     </div>
   );
 }

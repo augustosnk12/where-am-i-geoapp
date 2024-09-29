@@ -25,6 +25,8 @@ interface GeomapContextProps {
   setSelectedCity: (city: SelectedCityProps) => void;
   openCityCardInfo: boolean;
   setOpenCityCardInfo: (openCityCardInfo: boolean) => void;
+  openPlaceInfoModal: boolean;
+  setOpenPlaceInfoModal: (openPlaceInfoModal: boolean) => void;
 }
 
 interface FetchPlacesProps {
@@ -45,6 +47,7 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
     {} as SelectedCityProps
   );
   const [openCityCardInfo, setOpenCityCardInfo] = useState(false);
+  const [openPlaceInfoModal, setOpenPlaceInfoModal] = useState(false);
 
   async function fetchPlaces({
     search,
@@ -85,6 +88,8 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
         setSelectedCity,
         openCityCardInfo,
         setOpenCityCardInfo,
+        openPlaceInfoModal,
+        setOpenPlaceInfoModal,
       }}
     >
       {children}

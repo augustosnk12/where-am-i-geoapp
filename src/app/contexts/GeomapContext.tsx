@@ -12,19 +12,19 @@ type GeomapProviderProps = {
 
 export interface Places {
   razao_social: string;
-  nome_fantasia: string;
-  cnpj: string;
-  cep: string;
-  logradouro: string;
-  numero: number;
-  complemento: string;
-  bairro: string;
-  cidade: string;
-  uf: string;
-  telefone: string;
+  nome_fantasia?: string;
+  cnpj?: string;
+  cep?: string;
+  logradouro?: string;
+  numero?: number;
+  complemento?: string;
+  bairro?: string;
+  cidade?: string;
+  uf?: string;
+  telefone?: string;
   latitude: number;
   longitude: number;
-  isMarques: boolean;
+  isMarques?: boolean;
   marker_name: string;
 }
 
@@ -37,7 +37,12 @@ interface GeomapContextProps {
   setSelectedPlace: (place: Places) => void;
   search: string;
   setSearch: (search: string) => void;
-  fetchPlaces: (search?: string) => void;
+  fetchPlaces: ({ search }: FetchPlacesProps) => void;
+}
+
+interface FetchPlacesProps {
+  search?: string;
+  onlyMarques?: boolean;
 }
 
 export const GeomapContext = createContext({} as GeomapContextProps);
@@ -51,23 +56,25 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
 
   const [selectedPlace, setSelectedPlace] = useState<Places>({} as Places);
 
-  async function fetchPlaces(search?: string) {
+  async function fetchPlaces({
+    search,
+    onlyMarques = false,
+  }: FetchPlacesProps) {
     const res = await fetch("/api/places");
     const data = await res.json();
 
-    console.log('fechk kkk')
+    const filteredPlaces = data.filter((place: Places) => {
+      const matchesSearch = search ? place.razao_social.includes(search) : true;
+      const matchesMarques = onlyMarques ? place.marker_name == "marques" : true;
 
-    if (search) {
-      return setPlaces(
-        data.filter((place: Places) => place.razao_social.includes(search))
-      );
-    }
+      return matchesSearch && matchesMarques;
+    });
 
-    setPlaces(data);
+    setPlaces(filteredPlaces);
   }
 
   useEffect(() => {
-    fetchPlaces();
+    fetchPlaces({});
   }, []);
 
   return (

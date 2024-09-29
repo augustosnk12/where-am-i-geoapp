@@ -10,6 +10,7 @@ import {
   useMap,
   useMapEvents,
   ImageOverlay,
+  GeoJSON,
 } from "react-leaflet";
 import L, { LatLngExpression, LatLngTuple, Icon } from "leaflet";
 
@@ -19,6 +20,12 @@ import "leaflet-defaulticon-compatibility";
 import { useEffect } from "react";
 import { Places, useGeomapContext } from "../../contexts/GeomapContext";
 import { markerIconColor } from "./functions";
+import geojson from "../../jsonData/geojson-pernambuco.json";
+import {
+  Feature,
+  GeoJSON as GeoJSONProps,
+  Properties,
+} from "@/app/interfaces/geojson";
 
 interface MarkerData {
   razao_social: string;
@@ -45,6 +52,15 @@ function MyComponent() {
 
   return null;
 }
+
+const onEachCity = (city: Feature, layer: any) => {
+  const cityName = city.properties.name;
+  layer.bindPopup(`<strong>${cityName}</strong>`);
+
+  layer.on("click", () => {
+    console.log(`City clicked: ${cityName}`);
+  });
+};
 
 const createIcon = (companyName: string) => {
   const color = markerIconColor(companyName);
@@ -74,7 +90,6 @@ const Map = (Map: MapProps) => {
     useEffect(() => {
       if (!latitude || !longitude) return;
 
-      console.log({ zoom })
       map.setView([latitude, longitude], zoom);
 
       L.popup()
@@ -108,6 +123,15 @@ const Map = (Map: MapProps) => {
       ))}
 
       <MyComponent />
+
+      <GeoJSON
+        data={geojson as GeoJSONProps}
+        onEachFeature={onEachCity}
+        style={() => ({
+          weight: 1,
+          fillOpacity: 0.1,
+        })}
+      />
 
       <RecenterAutomatically {...selectedPlace} />
     </MapContainer>

@@ -14,12 +14,12 @@ export default function Sidebar() {
 
   function handleSearch(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    fetchPlaces(search);
+    fetchPlaces({ search });
   }
 
   function cleanSearch() {
     setSearch("");
-    fetchPlaces("");
+    fetchPlaces({ search: "" });
   }
 
   useEffect(() => {
@@ -75,7 +75,10 @@ export default function Sidebar() {
               autoCapitalize="none"
             />
             {search && (
-              <FaTimes className="text-gray-400 cursor-pointer" onClick={cleanSearch} />
+              <FaTimes
+                className="text-gray-400 cursor-pointer"
+                onClick={cleanSearch}
+              />
             )}
           </div>
         </div>

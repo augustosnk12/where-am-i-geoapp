@@ -8,7 +8,7 @@ interface ClientListProps {
 
 export default function ClientList({ isSearching }: ClientListProps) {
   const [fade, setFade] = useState({ opacity: 0 });
-  const { places, setCenter, setSelectedPlace } = useGeomapContext();
+  const { places, setSelectedPlace } = useGeomapContext();
 
   useEffect(() => {
     if (isSearching) {
@@ -25,7 +25,6 @@ export default function ClientList({ isSearching }: ClientListProps) {
           key={index}
           className="flex gap-4 mb-4 cursor-pointer hover:opacity-90"
           onClick={() => {
-            setCenter([item.latitude, item.longitude]);
             setSelectedPlace(item);
           }}
         >

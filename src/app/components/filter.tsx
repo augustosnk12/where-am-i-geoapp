@@ -3,18 +3,61 @@
 import { useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import { LiaTimesSolid } from "react-icons/lia";
+import { centroid } from "@turf/turf";
+
 import Toggle from "./toggle";
+import ibgeCities from "../../app/jsonData/ibge-cities.json";
+import { CitiesIBGEProps } from "../interfaces/json";
+import { useGeomapContext } from "../contexts/GeomapContext";
+import { Feature } from "../interfaces/geojson";
+import geojson from "../jsonData/geojson-pernambuco.json";
 
 export default function Filter() {
-  const [isFiltering, setIsFiltering] = useState(false);
+  const [displayFiltersBar, setDisplayFiltersBar] = useState(false);
   const [isMarquesActive, setIsMarquesActive] = useState(false);
   const [isRivalActive, setIsRivalActive] = useState(false);
+  const [selectedIbgeCity, setSelectedIbgeCity] = useState<string>("");
+
+  const { setSelectedPlace, fetchPlaces } = useGeomapContext();
+
+  function handleApplyFilters(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (selectedIbgeCity) {
+      const selectedGeoJsonCity = geojson.features.find(
+        (city: any) => city.properties.id === selectedIbgeCity
+      ) as Feature;
+
+      const centerCoordinates = getCenterCoordinates(selectedGeoJsonCity);
+
+      setSelectedPlace({
+        latitude: centerCoordinates[1],
+        longitude: centerCoordinates[0],
+        razao_social: selectedGeoJsonCity.properties.name,
+        marker_name: "",
+      });
+    } else {
+      setSelectedPlace({} as any);
+    }
+
+    fetchPlaces({ onlyMarques: isMarquesActive });
+
+    setDisplayFiltersBar(false);
+  }
+
+  function getCenterCoordinates(city: Feature) {
+    const cityCentroid = centroid(city);
+    return [
+      cityCentroid.geometry.coordinates[0],
+      cityCentroid.geometry.coordinates[1],
+    ];
+  }
 
   return (
     <>
-      {!isFiltering ? (
+      {!displayFiltersBar ? (
         <div
-          onClick={() => setIsFiltering(true)}
+          onClick={() => setDisplayFiltersBar(true)}
           className="absolute top-4 right-4 bg-white rounded-full py-2 px-4 shadow-xl cursor-pointer z-[999] flex gap-3 items-center"
         >
           <FaFilter />
@@ -24,42 +67,51 @@ export default function Filter() {
         <div
           className={`top-0 right-0 h-[100vh] bg-white flex flex-col p-4 transition-all duration-300 ease-in-out w-[400px] z-[999]`}
         >
-          {/* Header */}
-          <div className="flex justify-between w-full items-center">
-            <div className="text-md font-bold">Filtros</div>
-            <LiaTimesSolid
-              className="text-black cursor-pointer"
-              size={24}
-              onClick={() => setIsFiltering(false)}
-            />
-          </div>
+          <form onSubmit={handleApplyFilters}>
+            {/* Header */}
+            <div className="flex justify-between w-full items-center">
+              <div className="text-md font-bold">Filtros</div>
+              <LiaTimesSolid
+                className="text-black cursor-pointer"
+                size={24}
+                onClick={() => setDisplayFiltersBar(false)}
+              />
+            </div>
 
-          {/* City selection */}
-          <div className="mt-8">
-            <div className="text-md font-bold">Cidade</div>
-            <select className="w-full border border-gray-300 rounded-md p-2 mt-2">
-              <option value="">Selecione</option>
-              <option value="1">Cidade 1</option>
-              <option value="2">Cidade 2</option>
-              <option value="3">Cidade 3</option>
-            </select>
-          </div>
+            {/* City selection */}
+            <div className="mt-8">
+              <div className="text-md font-bold">Cidade</div>
+              <select
+                onChange={(e) => setSelectedIbgeCity(e.target.value)}
+                className="w-full border border-gray-300 rounded-md p-2 mt-2"
+              >
+                <option value="">Selecione</option>
+                {ibgeCities.map((city: CitiesIBGEProps) => (
+                  <option key={city.value} value={city.value}>
+                    {city.label}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          {/* Marques toggle */}
-          <div className="mt-8 flex flex-col gap-2">
-            <div className="text-md font-bold">Marques</div>
+            {/* Marques toggle */}
+            <div className="mt-8 flex flex-col gap-2">
+              <div className="text-md font-bold">Marques</div>
 
-            <Toggle
-              isActive={isMarquesActive}
-              setIsActive={setIsMarquesActive}
-            />
-          </div>
+              <Toggle
+                isActive={isMarquesActive}
+                setIsActive={setIsMarquesActive}
+              />
+            </div>
 
-          {/* Rival toggle */}
-          <div className="mt-8 flex flex-col gap-2">
-            <div className="text-md font-bold">Concorrentes</div>
-            <Toggle isActive={isRivalActive} setIsActive={setIsRivalActive} />
-          </div>
+            {/* Rival toggle */}
+            <div className="mt-8 flex flex-col gap-2">
+              <div className="text-md font-bold">Concorrentes</div>
+              <Toggle isActive={isRivalActive} setIsActive={setIsRivalActive} />
+            </div>
+
+            <button>butao</button>
+          </form>
         </div>
       )}
     </>

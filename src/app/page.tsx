@@ -5,10 +5,9 @@ import dynamic from "next/dynamic";
 import Sidebar from "./components/sidebar";
 import Filter from "./components/filter";
 import CardCity from "./components/cardCity";
-import { GeomapProvider, useGeomapContext } from "./contexts/GeomapContext";
+import { GeomapProvider } from "./contexts/GeomapContext";
 
 export default function Home() {
-  const { openCityCardInfo } = useGeomapContext();
   const Map = useMemo(
     () =>
       dynamic(() => import("./components/leaflet-map"), {

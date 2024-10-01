@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useGeomapContext } from "../contexts/GeomapContext";
-import CardInformation from "./cardInformation";
 
 interface ClientListProps {
   isDisplayingFullWidth: boolean;
@@ -13,7 +12,6 @@ export default function ClientList({ isDisplayingFullWidth }: ClientListProps) {
     places,
     setSelectedPlace,
     setOpenPlaceInfoModal,
-    openPlaceInfoModal,
   } = useGeomapContext();
 
   useEffect(() => {
@@ -77,7 +75,6 @@ export default function ClientList({ isDisplayingFullWidth }: ClientListProps) {
           )}
         </div>
       ))}
-      {openPlaceInfoModal && <CardInformation />}
     </div>
   );
 }

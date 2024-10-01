@@ -1,5 +1,3 @@
-// src/components/map/index.tsx
-
 "use client";
 
 import {
@@ -10,12 +8,13 @@ import {
   useMap,
   GeoJSON,
 } from "react-leaflet";
-import L, { LatLngExpression, LatLngTuple, Icon } from "leaflet";
+import L, { LatLngExpression, LatLngTuple } from "leaflet";
 
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
-import { useEffect, useState } from "react";
+
+import { useEffect } from "react";
 import { useGeomapContext } from "../../contexts/GeomapContext";
 import { createIcon, MyComponent } from "./functions";
 import geojson from "../../jsonData/geojson-pernambuco.json";
@@ -34,7 +33,7 @@ const DEFAULTS_MAP_CONFIG = {
 };
 
 const Map = (Map: MapProps) => {
-  const { zoom = DEFAULTS_MAP_CONFIG.zoom, posix } = Map;
+  const { zoom = DEFAULTS_MAP_CONFIG.zoom } = Map;
 
   const {
     places,
@@ -45,6 +44,7 @@ const Map = (Map: MapProps) => {
     setOpenCityCardInfo,
     setOpenPlaceInfoModal,
     openPlaceInfoModal,
+    displayMarkers
   } = useGeomapContext();
 
   const RecenterAutomatically = ({
@@ -105,7 +105,7 @@ const Map = (Map: MapProps) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {places.map((place, index) => (
+      {displayMarkers && places.map((place, index) => (
         <Marker
           key={index}
           position={[place.latitude, place.longitude]}

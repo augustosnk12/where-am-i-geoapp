@@ -19,8 +19,13 @@ export default function Filter() {
   const [isMarquesActive, setIsMarquesActive] = useState(false);
   const [selectedIbgeCity, setSelectedIbgeCity] = useState<string>("");
 
-  const { setSelectedPlace, fetchPlaces, setOpenCityCardInfo } =
-    useGeomapContext();
+  const {
+    setSelectedPlace,
+    fetchPlaces,
+    setOpenCityCardInfo,
+    displayMarkers,
+    setDisplayMarkers,
+  } = useGeomapContext();
 
   function handleApplyFilters(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -103,7 +108,7 @@ export default function Filter() {
               <div className="mt-8 flex flex-col gap-2">
                 <div className="flex items-center gap-2">
                   <div className="text-md font-bold">Marques</div>
-                  <Tooltip content="Ao ativar essa opção, apenas os clientes Marques são exibidos">
+                  <Tooltip content="Ao ativar essa opção, apenas os clientes Marques serão exibidos">
                     <IoMdInformationCircleOutline />
                   </Tooltip>
                 </div>
@@ -111,6 +116,21 @@ export default function Filter() {
                 <Toggle
                   isActive={isMarquesActive}
                   setIsActive={setIsMarquesActive}
+                />
+              </div>
+
+              {/* Display markers */}
+              <div className="mt-8 flex flex-col gap-2">
+                <div className="flex items-center gap-2">
+                  <div className="text-md font-bold">Exibir marcadores</div>
+                  <Tooltip content="Define se deve ou não exibir os marcadores no mapa">
+                    <IoMdInformationCircleOutline />
+                  </Tooltip>
+                </div>
+
+                <Toggle
+                  isActive={displayMarkers}
+                  setIsActive={setDisplayMarkers}
                 />
               </div>
             </div>

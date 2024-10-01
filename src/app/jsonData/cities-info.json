@@ -7,5 +7,50 @@
     "population": 55000,
     "secretary": "Maria",
     "secretary_phone": "(81) 99999-9999"
+  },
+  {
+    "cod_ibge": "2605400",
+    "city": "Feira Nova",
+    "state": "PE",
+    "ubs": 10,
+    "population": 98000,
+    "secretary": "Carlos",
+    "secretary_phone": "(81) 98888-8888"
+  },
+  {
+    "cod_ibge": "2608453",
+    "city": "Lagoa do Carro",
+    "state": "PE",
+    "ubs": 5,
+    "population": 37000,
+    "secretary": "Ana",
+    "secretary_phone": "(81) 98777-7777"
+  },
+  {
+    "cod_ibge": "2600203",
+    "city": "Afrânio",
+    "state": "PE",
+    "ubs": 3,
+    "population": 21000,
+    "secretary": "João",
+    "secretary_phone": "(81) 98666-6666"
+  },
+  {
+    "cod_ibge": "2600302",
+    "city": "Agrestina",
+    "state": "PE",
+    "ubs": 4,
+    "population": 24000,
+    "secretary": "Beatriz",
+    "secretary_phone": "(81) 98555-5555"
+  },
+  {
+    "cod_ibge": "2600401",
+    "city": "Água Preta",
+    "state": "PE",
+    "ubs": 6,
+    "population": 34000,
+    "secretary": "Lucas",
+    "secretary_phone": "(81) 98444-4444"
   }
 ]

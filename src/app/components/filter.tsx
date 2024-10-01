@@ -13,7 +13,6 @@ import { useGeomapContext } from "../contexts/GeomapContext";
 import { Feature } from "../interfaces/geojson";
 import geojson from "../jsonData/geojson-pernambuco.json";
 import Tooltip from "./tooltip";
-import Select from 'react-select';
 
 export default function Filter() {
   const [displayFiltersBar, setDisplayFiltersBar] = useState(false);

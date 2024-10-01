@@ -42,8 +42,8 @@ export default function ClientList({ isDisplayingFullWidth }: ClientListProps) {
             src="/city.png"
             alt="foto da cidade"
             width={55}
-            height={55}
-            className="rounded-md h-14 mb-6"
+            height={35}
+            className="rounded-lg h-14 mb-6"
           />
 
           {isDisplayingFullWidth && (
@@ -58,7 +58,7 @@ export default function ClientList({ isDisplayingFullWidth }: ClientListProps) {
                   transition: "opacity 0.3s ease-in-out",
                   opacity: fade.opacity,
                 }}
-                className="text-lg font-bold"
+                className="text-md font-bold"
               >
                 {item.razao_social}
               </p>
@@ -67,7 +67,7 @@ export default function ClientList({ isDisplayingFullWidth }: ClientListProps) {
                   transition: "opacity 0.3s ease-in-out",
                   opacity: fade.opacity,
                 }}
-                className="text-sm text-gray-500"
+                className="text-sm text-gray-400"
               >
                 {item.logradouro}, {item.cidade}-{item.uf}
               </p>

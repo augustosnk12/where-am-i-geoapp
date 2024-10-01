@@ -7,24 +7,25 @@ export default function Card() {
 
   return (
     openCityCardInfo && (
-      <div className="absolute top-24 right-4 h-[80vh] p-6 bg-white border rounded-lg shadow-lg z-[888] over overflow-auto no-scrollbar">
-        <div className="flex justify-end mr-[-15px] mt-[-15px]">
+      <div className="absolute bottom-6 right-4 w-96 h-[40vh] p-8 m-4 bg-white border rounded-2xl shadow-lg z-[888] over overflow-auto no-scrollbar">
+        <div className="absolute end-0 mr-6">
           <LiaTimesSolid
-            className="text-black cursor-pointer"
-            size={16}
+            className="text-black cursor-pointer hover:text-[--button-blue]"
+            size={20}
             onClick={() => setOpenCityCardInfo(false)}
           />
         </div>
-        <h1 className="text-2xl font-bold mb-4">
-          {selectedCity.city} - {selectedCity.state}
+        <h1 className="text-2xl font-bold ">
+          {selectedCity.city}
         </h1>
+        <p className="text-sm text-gray-400 mb-4">{selectedCity.state}</p>
 
         <div>
-          <h2 className="text-lg font-semibold">Informações</h2>
-          <div>UBS: {selectedCity.ubs}</div>
-          <div>População: {selectedCity.population}</div>
-          <div>Secretário: {selectedCity.secretary}</div>
-          <div>Contato: {selectedCity.secretary_phone}</div>
+          <h2 className="text-md font-semibold">Informações</h2>
+          <div className="text-sm">UBS: {selectedCity.ubs}</div>
+          <div className="text-sm">População: {selectedCity.population}</div>
+          <div className="text-sm">Secretário: {selectedCity.secretary}</div>
+          <div className="text-sm">Contato: {selectedCity.secretary_phone}</div>
         </div>
       </div>
     )

@@ -16,7 +16,7 @@ import "leaflet-defaulticon-compatibility";
 
 import { useEffect } from "react";
 import { useGeomapContext } from "../../contexts/GeomapContext";
-import { createIcon, MyComponent } from "./functions";
+import { createIcon } from "./functions";
 import geojson from "../../jsonData/geojson-pernambuco.json";
 import { Feature, GeoJSON as GeoJSONProps } from "@/app/interfaces/geojson";
 import CardInformation from "../cardInformation";

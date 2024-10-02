@@ -30,7 +30,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`h-[100vh] bg-white flex items-center flex-col p-4 transition-all duration-300 ease-in-out`}
+      className={`h-[100vh] bg-white flex items-center flex-col p-4 transition-width duration-300 ease-in-out`}
       style={{ width: isDisplayingFullWidth ? "400px" : "100px" }}
     >
       <div className="flex items-center justify-between w-full">

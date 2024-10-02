@@ -44,7 +44,7 @@ const Map = (Map: MapProps) => {
     setOpenCityCardInfo,
     setOpenPlaceInfoModal,
     openPlaceInfoModal,
-    displayMarkers
+    displayMarkers,
   } = useGeomapContext();
 
   const RecenterAutomatically = ({
@@ -57,6 +57,9 @@ const Map = (Map: MapProps) => {
       if (!latitude || !longitude) return;
 
       map.setView([latitude, longitude], zoom);
+
+      if (openPlaceInfoModal) map.dragging.disable();
+      else if (!openPlaceInfoModal) map.dragging.enable();
 
       L.popup()
         .setLatLng([latitude, longitude])
@@ -105,37 +108,38 @@ const Map = (Map: MapProps) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {displayMarkers && places.map((place, index) => (
-        <Marker
-          key={index}
-          position={[place.latitude, place.longitude]}
-          icon={createIcon(place.marker_name)}
-          riseOnHover
-          bubblingMouseEvents
-          eventHandlers={{
-            mouseover: (e) => {
-              const marker = e.target;
-              marker.openPopup();
-            },
-          }}
-        >
-          <Popup>
-            <div className="flex flex-col gap-2">
-              {place.nome_fantasia}
-              <button
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-blue-700 transition"
-                onClick={() => handleOpen(place)}
-              >
-                Ver mais
-              </button>
-            </div>
-          </Popup>
-        </Marker>
-      ))}
+      {displayMarkers &&
+        places.map((place, index) => (
+          <Marker
+            key={index}
+            position={[place.latitude, place.longitude]}
+            icon={createIcon(place.marker_name)}
+            riseOnHover
+            bubblingMouseEvents
+            eventHandlers={{
+              mouseover: (e) => {
+                const marker = e.target;
+                marker.openPopup();
+              },
+            }}
+          >
+            <Popup>
+              <div className="flex flex-col gap-2">
+                {place.nome_fantasia}
+                <button
+                  className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-blue-700 transition"
+                  onClick={() => handleOpen(place)}
+                >
+                  Ver mais
+                </button>
+              </div>
+            </Popup>
+          </Marker>
+        ))}
 
       {openPlaceInfoModal && <CardInformation />}
 
-      <MyComponent />
+      {/* <MyComponent /> */}
 
       <GeoJSON
         data={geojson as GeoJSONProps}

@@ -8,7 +8,6 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 
 import Toggle from "./toggle";
 import ibgeCities from "../../app/jsonData/ibge-cities.json";
-import { CitiesIBGEProps } from "../interfaces/json";
 import { useGeomapContext } from "../contexts/GeomapContext";
 import { Feature } from "../interfaces/geojson";
 import geojson from "../jsonData/geojson-pernambuco.json";

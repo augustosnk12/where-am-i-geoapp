@@ -18,8 +18,7 @@ export function markerIconColor(companyName: string) {
 
 export function MyComponent() {
   const map = useMapEvents({
-    locationfound: (location) => {
-      console.log("location found:", location);
+    locationfound: () => {
     },
     dblclick: () => {
       map.locate();

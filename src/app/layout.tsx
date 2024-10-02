@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Poppins } from "@next/font/google";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "Marques Geo App",
-  description: "Site que exibe os locais onde estão os clientes da Marques Consult",
+  description:
+    "Site que exibe os locais onde estão os clientes da Marques Consult",
 };
 
 export default function RootLayout({
@@ -25,11 +21,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <head></head>
+      <body className={`${poppins.className} antialiased`}>{children}</body>
     </html>
   );
 }

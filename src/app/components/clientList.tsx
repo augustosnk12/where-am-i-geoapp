@@ -41,9 +41,9 @@ export default function ClientList({ isDisplayingFullWidth }: ClientListProps) {
           <Image
             src="/city.png"
             alt="foto da cidade"
-            width={55}
+            width={50}
             height={35}
-            className="rounded-lg h-14 mb-6"
+            className="rounded-lg h-12 mb-6"
           />
 
           {isDisplayingFullWidth && (

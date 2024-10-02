@@ -18,7 +18,7 @@ export default function Home() {
   );
 
   return (
-    <div className="flex">
+    <div className="flex text-black">
       <GeomapProvider>
         <Sidebar />
         <div className="w-full h-[100vh]">

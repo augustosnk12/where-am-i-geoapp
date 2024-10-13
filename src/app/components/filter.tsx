@@ -5,6 +5,7 @@ import { FaFilter } from "react-icons/fa";
 import { LiaTimesSolid } from "react-icons/lia";
 import { centroid } from "@turf/turf";
 import { IoMdInformationCircleOutline } from "react-icons/io";
+import Select from "react-select";
 
 import Toggle from "./toggle";
 import ibgeCities from "../../app/jsonData/ibge-cities.json";
@@ -12,7 +13,6 @@ import { useGeomapContext } from "../contexts/GeomapContext";
 import { Feature } from "../interfaces/geojson";
 import geojson from "../jsonData/geojson-pernambuco.json";
 import Tooltip from "./tooltip";
-import Select from "react-select";
 
 export default function Filter() {
   const [displayFiltersBar, setDisplayFiltersBar] = useState(false);
@@ -94,6 +94,7 @@ export default function Filter() {
                 className="w-full text-sm rounded-md mt-2"
                 onChange={(e) => setSelectedIbgeCity(e?.value as string)}
                 options={ibgeCities}
+                placeholder="Selecionar"
               ></Select>
             </div>
 

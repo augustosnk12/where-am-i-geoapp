@@ -1,6 +1,7 @@
 import React from "react";
-import { useGeomapContext } from "../contexts/GeomapContext";
 import { LiaTimesSolid } from "react-icons/lia";
+
+import { useGeomapContext } from "../contexts/GeomapContext";
 
 export default function Card() {
   const { openCityCardInfo, selectedCity, setOpenCityCardInfo } = useGeomapContext();

@@ -16,6 +16,8 @@ export function markerIconColor(companyName: string) {
   }
 }
 
+// function to be used in case of clicking on the map. Place it 
+//as a child of the Map component
 export function MyComponent() {
   const map = useMapEvents({
     locationfound: () => {
@@ -28,6 +30,7 @@ export function MyComponent() {
   return null;
 }
 
+//function to create a custom icon for the markers
 export const createIcon = (companyName: string) => {
   const color = markerIconColor(companyName);
 

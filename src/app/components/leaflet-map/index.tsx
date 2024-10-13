@@ -22,6 +22,7 @@ import { Feature, GeoJSON as GeoJSONProps } from "@/app/interfaces/geojson";
 import CardInformation from "../cardInformation";
 import { Places, SelectedCityProps } from "@/app/contexts/interfaces";
 import citiesInfo from "../../../app/jsonData/cities-info.json";
+import ibgeCities from "../../../app/jsonData/ibge-cities.json";
 
 interface MapProps {
   posix: LatLngExpression | LatLngTuple;
@@ -69,7 +70,7 @@ const Map = (Map: MapProps) => {
     return null;
   };
 
-  const handleOpen = (place: Places) => {
+  const handleOpenPlaceDetails = (place: Places) => {
     setSelectedPlace(place);
     setOpenPlaceInfoModal(true);
   };
@@ -92,7 +93,17 @@ const Map = (Map: MapProps) => {
       setSelectedCity(selectedMapCity);
       setOpenCityCardInfo(true);
     } else {
-      setOpenCityCardInfo(false);
+      const ibgeCity = ibgeCities.find((city) => city.value === codIbge);
+      setSelectedCity({
+        city: ibgeCity?.label as string,
+        cod_ibge: ibgeCity?.value as string,
+        state: "PE",
+        population: 1,
+        secretary: "James Bond",
+        secretary_phone: "(81) 99999-9999",
+        ubs: 12,
+      });
+      setOpenCityCardInfo(true);
     }
   }
 
@@ -128,7 +139,7 @@ const Map = (Map: MapProps) => {
                 {place.nome_fantasia}
                 <button
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-blue-700 transition"
-                  onClick={() => handleOpen(place)}
+                  onClick={() => handleOpenPlaceDetails(place)}
                 >
                   Ver mais
                 </button>
@@ -138,8 +149,6 @@ const Map = (Map: MapProps) => {
         ))}
 
       {openPlaceInfoModal && <CardInformation />}
-
-      {/* <MyComponent /> */}
 
       <GeoJSON
         data={geojson as GeoJSONProps}

@@ -3,14 +3,37 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
-import { LiaTimesSolid } from "react-icons/lia";
+import {
+  IoIosArrowDropleftCircle,
+  IoIosArrowDroprightCircle,
+} from "react-icons/io";
+
 import ClientList from "./clientList";
 import { useGeomapContext } from "../contexts/GeomapContext";
 
 export default function Sidebar() {
   const [isDisplayingFullWidth, setIsDisplayingFullWidth] = useState(false);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
 
   const { setSearch, search, fetchPlaces } = useGeomapContext();
+
+  useEffect(() => {
+    if (debouncedSearch === "") {
+      fetchPlaces({ search: "" });
+    } else {
+      const handler = setTimeout(() => {
+        fetchPlaces({ search: debouncedSearch });
+      }, 500);
+
+      return () => {
+        clearTimeout(handler);
+      };
+    }
+  }, [debouncedSearch]);
+
+  useEffect(() => {
+    setDebouncedSearch(search);
+  }, [search]);
 
   function handleSearch(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -22,15 +45,9 @@ export default function Sidebar() {
     fetchPlaces({ search: "" });
   }
 
-  useEffect(() => {
-    if (!isDisplayingFullWidth) {
-      cleanSearch();
-    }
-  }, [isDisplayingFullWidth]);
-
   return (
     <div
-      className={`h-[100vh] bg-white flex items-center flex-col p-4 transition-width duration-300 ease-in-out`}
+      className={`h-[100vh] bg-white flex items-center flex-col p-4 transition-width duration-300 ease-in-out relative`}
       style={{ width: isDisplayingFullWidth ? "400px" : "100px" }}
     >
       <div className="flex items-center justify-between w-full">
@@ -49,13 +66,19 @@ export default function Sidebar() {
             Marques Maps
           </div>
         </div>
-        <LiaTimesSolid
-          className={`text-black transition-opacity duration-300 cursor-pointer hover:text-blue-500 ${
-            isDisplayingFullWidth ? "opacity-100" : "opacity-0"
-          }`}
-          size={24}
-          onClick={() => setIsDisplayingFullWidth(false)}
-        />
+        {isDisplayingFullWidth ? (
+          <IoIosArrowDropleftCircle
+            className="absolute -right-3 top-20 transform -translate-y-1/2 cursor-pointer hover:text-gray-700 z-[999]"
+            size={28}
+            onClick={() => setIsDisplayingFullWidth(!isDisplayingFullWidth)}
+          />
+        ) : (
+          <IoIosArrowDroprightCircle
+            className="absolute -right-3 top-20 transform -translate-y-1/2 cursor-pointer hover:text-gray-700 z-[999]"
+            size={28}
+            onClick={() => setIsDisplayingFullWidth(!isDisplayingFullWidth)}
+          />
+        )}
       </div>
 
       <form onSubmit={handleSearch} className="w-full">
@@ -72,15 +95,12 @@ export default function Sidebar() {
           <div className="flex items-left gap-2">
             <input
               type="text"
-              className={
-                !search
-                  ? `w-full h-12 border border-gray-300 rounded-lg p-2 pl-10 m-0 text-left transition-all duration-300 ease-in-out hover:border-gray-700 focus:border-gray-700 focus:outline-none`
-                  : `w-full h-12 border border-gray-300 rounded-lg p-2 pl-4 m-0 text-left transition-all duration-300 ease-in-out hover:border-gray-700 focus:border-gray-700 focus:outline-none`
-              }
+              className="w-full h-12 border border-gray-300 rounded-lg p-2 m-0 text-left transition-all duration-300 ease-in-out hover:border-gray-700 focus:border-gray-700 focus:outline-none"
               onFocus={() => setIsDisplayingFullWidth(true)}
               onChange={(e) => setSearch(e.target.value)}
               value={search}
               autoCapitalize="none"
+              style={{ paddingLeft: !search ? "30px" : "10px" }}
             />
             {search && (
               <FaTimes

@@ -68,7 +68,7 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
     const data = await res.json();
 
     const filteredPlaces = data.filter((place: Places) => {
-      const matchesSearch = search ? place.razao_social.includes(search) : true;
+      const matchesSearch = search ? place.razao_social.toLowerCase().includes(search.toLowerCase()) : true;
       const matchesMarques = onlyMarques
         ? place.marker_name == "marques"
         : true;

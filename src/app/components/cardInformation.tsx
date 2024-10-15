@@ -15,29 +15,29 @@ export default function CardInformation() {
     <div className={`relative bg-black/50 max-w-screen h-screen mx-auto z-[1000] ${poppins.className}`}>
       <div className="relative h-[80vh] max-w-3xl inset-y-16 mx-auto bg-white rounded-xl shadow-lg overflow-hidden z-[999]">
         <button
-          className="absolute top-2 right-2 text-white rounded-full p-1 hover:bg-red-500 transition"
+          className="absolute top-2 right-2 text-white rounded-full p-1 hover:opacity-70 transition"
           onClick={() => setOpenPlaceInfoModal(false)}
         >
-          <IoCloseCircleOutline className="size-10" />
+          <IoCloseCircleOutline className="size-10" color="#000" />
         </button>
 
         <img
           className="w-full h-48 object-cover"
-          src={"https://via.placeholder.com/600x400"}
+          src={"http://via.placeholder.com/600x400"}
           alt={"Image of company" + selectedPlace.razao_social}
         />
 
         <div className="p-6">
           <div className="text-xl font-bold">{selectedPlace.razao_social}</div>
-          <div className="text-gray-700  mb-2">{selectedPlace.nome_fantasia}</div>
-          <div className="text-gray-700">{`${selectedPlace.logradouro}, 
+          <div className="text-gray-700 text-base mb-2">{selectedPlace.nome_fantasia}</div>
+          <div className="text-gray-700 text-base">{`${selectedPlace.logradouro}, 
           ${selectedPlace.numero}, ${selectedPlace.bairro}, 
           ${selectedPlace.cidade}-${selectedPlace.uf}`}</div>
-          <p className="text-gray-700">{selectedPlace.telefone}</p>
+          <p className="text-gray-700 text-base">{selectedPlace.telefone}</p>
         </div>
 
         {selectedPlace.marker_name !== "marques" && (
-          <div className="px-6">
+          <div className="px-6 text-base">
             <hr className="my-4" />
 
             <p className="text-gray-700">

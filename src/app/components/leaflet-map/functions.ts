@@ -1,7 +1,5 @@
 "use client";
 
-import { Feature } from "@/app/interfaces/geojson";
-import { centroid } from "@turf/turf";
 import { Icon } from "leaflet";
 import { useMapEvents } from "react-leaflet";
 
@@ -45,11 +43,3 @@ export const createIcon = (companyName: string) => {
     shadowSize: [41, 41],
   });
 };
-
-export function getCenterCoordinates(city: Feature) {
-  const cityCentroid = centroid(city);
-  return [
-    cityCentroid.geometry.coordinates[0],
-    cityCentroid.geometry.coordinates[1],
-  ];
-}

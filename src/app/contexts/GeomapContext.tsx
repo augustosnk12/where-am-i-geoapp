@@ -11,7 +11,7 @@ import citiesInfo from "../../app/jsonData/cities-info.json";
 import ibgeCities from "../../app/jsonData/ibge-cities.json";
 import geojson from "../jsonData/geojson-pernambuco.json";
 import { Feature } from "../interfaces/geojson";
-import { getCenterCoordinates } from "../components/leaflet-map/functions";
+import { centroid } from "@turf/turf";
 
 
 type GeomapProviderProps = {
@@ -77,6 +77,14 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
     });
 
     setPlaces(filteredPlaces);
+  }
+
+  function getCenterCoordinates(city: Feature) {
+    const cityCentroid = centroid(city);
+    return [
+      cityCentroid.geometry.coordinates[0],
+      cityCentroid.geometry.coordinates[1],
+    ];
   }
 
   function handleClickCity(codIbge: string) {

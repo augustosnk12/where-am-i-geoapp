@@ -3,12 +3,10 @@
 import { useEffect, useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import { LiaTimesSolid } from "react-icons/lia";
-import { centroid } from "@turf/turf";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 
 import Toggle from "./toggle";
 import { useGeomapContext } from "../contexts/GeomapContext";
-import { Feature } from "../interfaces/geojson";
 import Tooltip from "./tooltip";
 
 export default function Filter() {
@@ -20,14 +18,6 @@ export default function Filter() {
     displayMarkers,
     setDisplayMarkers,
   } = useGeomapContext();
-
-  function getCenterCoordinates(city: Feature) {
-    const cityCentroid = centroid(city);
-    return [
-      cityCentroid.geometry.coordinates[0],
-      cityCentroid.geometry.coordinates[1],
-    ];
-  }
 
   useEffect(() => {
     fetchPlaces({ onlyMarques: isMarquesActive });

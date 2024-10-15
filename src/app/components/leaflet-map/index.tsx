@@ -42,7 +42,7 @@ const Map = (Map: MapProps) => {
     setOpenPlaceInfoModal,
     openPlaceInfoModal,
     displayMarkers,
-    handleClickCity
+    handleClickCity,
   } = useGeomapContext();
 
   const RecenterAutomatically = ({
@@ -80,8 +80,6 @@ const Map = (Map: MapProps) => {
       handleClickCity(city.properties.id);
     });
   };
-
-
 
   return (
     <MapContainer

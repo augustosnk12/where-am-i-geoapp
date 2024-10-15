@@ -9,6 +9,10 @@ import {
 import { Places, SelectedCityProps } from "./interfaces";
 import citiesInfo from "../../app/jsonData/cities-info.json";
 import ibgeCities from "../../app/jsonData/ibge-cities.json";
+import geojson from "../jsonData/geojson-pernambuco.json";
+import { Feature } from "../interfaces/geojson";
+import { getCenterCoordinates } from "../components/leaflet-map/functions";
+
 
 type GeomapProviderProps = {
   children: ReactNode;
@@ -80,6 +84,20 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
       (city: SelectedCityProps) => city.cod_ibge === codIbge
     );
 
+    const selectedGeoJsonCity = geojson.features.find(
+      (city: any) => city.properties.id === codIbge
+    ) as Feature;
+
+    const centerCoordinates = getCenterCoordinates(selectedGeoJsonCity);
+
+    setSelectedPlace({
+      latitude: centerCoordinates[1],
+      longitude: centerCoordinates[0],
+      razao_social: selectedGeoJsonCity.properties.name,
+      marker_name: "",
+    });
+
+    
     if (selectedMapCity) {
       setSelectedCity(selectedMapCity);
       setOpenCityCardInfo(true);
@@ -97,6 +115,8 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
       });
       setOpenCityCardInfo(true);
     }
+
+    // setSelectedPlace({} as any);
   }
 
   useEffect(() => {

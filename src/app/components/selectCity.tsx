@@ -1,12 +1,9 @@
 "use client";
 
-import { centroid } from "@turf/turf";
 import Select, { SingleValue } from "react-select";
 
 import ibgeCities from "../../app/jsonData/ibge-cities.json";
 import { useGeomapContext } from "../contexts/GeomapContext";
-import { Feature } from "../interfaces/geojson";
-import geojson from "../jsonData/geojson-pernambuco.json";
 
 export function SelectCity() {
   const { setSelectedPlace, setOpenCityCardInfo, handleClickCity } =
@@ -19,32 +16,11 @@ export function SelectCity() {
     }>
   ) {
     if (event?.value) {
-      const selectedGeoJsonCity = geojson.features.find(
-        (city: any) => city.properties.id === event?.value
-      ) as Feature;
-
-      const centerCoordinates = getCenterCoordinates(selectedGeoJsonCity);
-
-      setSelectedPlace({
-        latitude: centerCoordinates[1],
-        longitude: centerCoordinates[0],
-        razao_social: selectedGeoJsonCity.properties.name,
-        marker_name: "",
-      });
-
       setOpenCityCardInfo(false);
       handleClickCity(event?.value);
     } else {
       setSelectedPlace({} as any);
     }
-  }
-
-  function getCenterCoordinates(city: Feature) {
-    const cityCentroid = centroid(city);
-    return [
-      cityCentroid.geometry.coordinates[0],
-      cityCentroid.geometry.coordinates[1],
-    ];
   }
 
   return (

@@ -5,7 +5,10 @@ import {
   useState,
   useEffect,
 } from "react";
+
 import { Places, SelectedCityProps } from "./interfaces";
+import citiesInfo from "../../app/jsonData/cities-info.json";
+import ibgeCities from "../../app/jsonData/ibge-cities.json";
 
 type GeomapProviderProps = {
   children: ReactNode;
@@ -29,6 +32,7 @@ interface GeomapContextProps {
   setOpenPlaceInfoModal: (openPlaceInfoModal: boolean) => void;
   displayMarkers: boolean;
   setDisplayMarkers: (displayMarkers: boolean) => void;
+  handleClickCity: (codIbge: string) => void;
 }
 
 interface FetchPlacesProps {
@@ -71,6 +75,30 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
     setPlaces(filteredPlaces);
   }
 
+  function handleClickCity(codIbge: string) {
+    const selectedMapCity = citiesInfo.find(
+      (city: SelectedCityProps) => city.cod_ibge === codIbge
+    );
+
+    if (selectedMapCity) {
+      setSelectedCity(selectedMapCity);
+      setOpenCityCardInfo(true);
+    } else {
+      //TODO: fetch real data
+      const ibgeCity = ibgeCities.find((city) => city.value === codIbge);
+      setSelectedCity({
+        city: ibgeCity?.label as string,
+        cod_ibge: ibgeCity?.value as string,
+        state: "PE",
+        population: 1,
+        secretary: "James Bond",
+        secretary_phone: "(81) 99999-9999",
+        ubs: 12,
+      });
+      setOpenCityCardInfo(true);
+    }
+  }
+
   useEffect(() => {
     fetchPlaces({});
   }, []);
@@ -95,6 +123,7 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
         setOpenPlaceInfoModal,
         displayMarkers,
         setDisplayMarkers,
+        handleClickCity,
       }}
     >
       {children}

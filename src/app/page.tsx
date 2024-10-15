@@ -6,6 +6,7 @@ import Sidebar from "./components/sidebar";
 import Filter from "./components/filter";
 import CardCity from "./components/cardCity";
 import { GeomapProvider } from "./contexts/GeomapContext";
+import { SelectCity } from "./components/selectCity";
 
 export default function Home() {
   const Map = useMemo(
@@ -24,6 +25,7 @@ export default function Home() {
         <div className="w-full h-[100vh]">
           <Map posix={[4.79029, -35.447176]} />
         </div>
+        <SelectCity />
         <Filter />
         <CardCity />
       </GeomapProvider>

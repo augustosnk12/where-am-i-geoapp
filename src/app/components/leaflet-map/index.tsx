@@ -20,9 +20,7 @@ import { createIcon } from "./functions";
 import geojson from "../../jsonData/geojson-pernambuco.json";
 import { Feature, GeoJSON as GeoJSONProps } from "@/app/interfaces/geojson";
 import CardInformation from "../cardInformation";
-import { Places, SelectedCityProps } from "@/app/contexts/interfaces";
-import citiesInfo from "../../../app/jsonData/cities-info.json";
-import ibgeCities from "../../../app/jsonData/ibge-cities.json";
+import { Places } from "@/app/contexts/interfaces";
 
 interface MapProps {
   posix: LatLngExpression | LatLngTuple;
@@ -41,11 +39,10 @@ const Map = (Map: MapProps) => {
     center,
     selectedPlace,
     setSelectedPlace,
-    setSelectedCity,
-    setOpenCityCardInfo,
     setOpenPlaceInfoModal,
     openPlaceInfoModal,
     displayMarkers,
+    handleClickCity,
   } = useGeomapContext();
 
   const RecenterAutomatically = ({
@@ -83,29 +80,6 @@ const Map = (Map: MapProps) => {
       handleClickCity(city.properties.id);
     });
   };
-
-  function handleClickCity(codIbge: string) {
-    const selectedMapCity = citiesInfo.find(
-      (city: SelectedCityProps) => city.cod_ibge === codIbge
-    );
-
-    if (selectedMapCity) {
-      setSelectedCity(selectedMapCity);
-      setOpenCityCardInfo(true);
-    } else {
-      const ibgeCity = ibgeCities.find((city) => city.value === codIbge);
-      setSelectedCity({
-        city: ibgeCity?.label as string,
-        cod_ibge: ibgeCity?.value as string,
-        state: "PE",
-        population: 1,
-        secretary: "James Bond",
-        secretary_phone: "(81) 99999-9999",
-        ubs: 12,
-      });
-      setOpenCityCardInfo(true);
-    }
-  }
 
   return (
     <MapContainer

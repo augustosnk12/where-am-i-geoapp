@@ -1,5 +1,7 @@
 "use client";
 
+import { Feature } from "@/app/interfaces/geojson";
+import { centroid } from "@turf/turf";
 import { Icon } from "leaflet";
 import { useMapEvents } from "react-leaflet";
 
@@ -16,12 +18,11 @@ export function markerIconColor(companyName: string) {
   }
 }
 
-// function to be used in case of clicking on the map. Place it 
+// function to be used in case of clicking on the map. Place it
 //as a child of the Map component
 export function MyComponent() {
   const map = useMapEvents({
-    locationfound: () => {
-    },
+    locationfound: () => {},
     dblclick: () => {
       map.locate();
     },
@@ -44,3 +45,11 @@ export const createIcon = (companyName: string) => {
     shadowSize: [41, 41],
   });
 };
+
+export function getCenterCoordinates(city: Feature) {
+  const cityCentroid = centroid(city);
+  return [
+    cityCentroid.geometry.coordinates[0],
+    cityCentroid.geometry.coordinates[1],
+  ];
+}

@@ -17,10 +17,18 @@ export default function Filter() {
     fetchPlaces,
     displayMarkers,
     setDisplayMarkers,
+    setPlaces,
+    setSelectedPlace
   } = useGeomapContext();
 
   useEffect(() => {
-    fetchPlaces({ onlyMarques: isMarquesActive });
+    setPlaces([]);
+    setSelectedPlace({} as any);
+
+    setTimeout(() => {
+      fetchPlaces({ onlyMarques: isMarquesActive });
+    }, 500);
+
   }, [isMarquesActive]);
 
   return (

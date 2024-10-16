@@ -47,7 +47,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`h-[100vh] bg-white flex items-center flex-col p-4 transition-width duration-300 ease-in-out relative`}
+      className={`h-[100vh] bg-white flex items-center flex-col p-4 transition-width duration-300 ease-in-out relative z-[1000]`}
       style={{ width: isDisplayingFullWidth ? "400px" : "100px" }}
     >
       <div className="flex items-center justify-between w-full">
@@ -100,7 +100,7 @@ export default function Sidebar() {
               onChange={(e) => setSearch(e.target.value)}
               value={search}
               autoCapitalize="none"
-              style={{ paddingLeft: !search ? "30px" : "10px" }}
+              style={{ paddingLeft: !search ? "40px" : "10px" }}
             />
             {search && (
               <FaTimes

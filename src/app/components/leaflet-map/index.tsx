@@ -19,7 +19,7 @@ import { useGeomapContext } from "../../contexts/GeomapContext";
 import { createIcon } from "./functions";
 import geojson from "../../jsonData/geojson-pernambuco.json";
 import { Feature, GeoJSON as GeoJSONProps } from "@/app/interfaces/geojson";
-import CardInformation from "../cardInformation";
+import CardInformation from "../placeCardInformation";
 import { Places } from "@/app/contexts/interfaces";
 
 interface MapProps {
@@ -56,8 +56,15 @@ const Map = (Map: MapProps) => {
 
       map.setView([latitude, longitude], zoom);
 
-      if (openPlaceInfoModal) map.dragging.disable();
-      else if (!openPlaceInfoModal) map.dragging.enable();
+      if (openPlaceInfoModal) {
+        map.dragging.disable();
+        map.scrollWheelZoom.disable();
+        map.doubleClickZoom.disable();
+      } else if (!openPlaceInfoModal) {
+        map.dragging.enable();
+        map.scrollWheelZoom.enable();
+        map.doubleClickZoom.enable();
+      }
 
       L.popup()
         .setLatLng([latitude, longitude])

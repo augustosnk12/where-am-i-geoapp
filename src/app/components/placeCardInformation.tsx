@@ -9,10 +9,10 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-export default function CardInformation() {
+export default function PlaceCardInformation() {
   const { selectedPlace, setOpenPlaceInfoModal } = useGeomapContext();
   return (
-    <div className={`relative bg-black/50 max-w-screen h-screen mx-auto z-[1000] ${poppins.className}`}>
+    <div className={`relative bg-black/50 max-w-screen h-screen mx-auto z-[1000] ${poppins.className} p-2`}>
       <div className="relative h-[80vh] max-w-3xl inset-y-16 mx-auto bg-white rounded-xl shadow-lg overflow-hidden z-[999]">
         <button
           className="absolute top-2 right-2 text-white rounded-full p-1 hover:opacity-70 transition"

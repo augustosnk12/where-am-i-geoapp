@@ -100,11 +100,14 @@ export default function Sidebar() {
               onChange={(e) => setSearch(e.target.value)}
               value={search}
               autoCapitalize="none"
-              style={{ paddingLeft: !search ? "40px" : "10px" }}
+              style={{
+                paddingLeft: !search ? "40px" : "10px",
+                paddingRight: search ? "40px" : "10px",
+              }}
             />
             {search && (
               <FaTimes
-                className="absolute right-4 top-4 text-gray-400 cursor-pointer hover:text-gray-700"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2  text-gray-400 cursor-pointer hover:text-gray-700"
                 onClick={cleanSearch}
               />
             )}

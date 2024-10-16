@@ -24,16 +24,16 @@ export default function PlaceCardInformation() {
         <img
           className="w-full h-48 object-cover"
           src={"http://via.placeholder.com/600x400"}
-          alt={"Image of company" + selectedPlace.razao_social}
+          alt={"Image of company" + selectedPlace.company_name}
         />
 
         <div className="p-6">
-          <div className="text-xl font-bold">{selectedPlace.razao_social}</div>
-          <div className="text-gray-700 text-base mb-2">{selectedPlace.nome_fantasia}</div>
-          <div className="text-gray-700 text-base">{`${selectedPlace.logradouro}, 
-          ${selectedPlace.numero}, ${selectedPlace.bairro}, 
-          ${selectedPlace.cidade}-${selectedPlace.uf}`}</div>
-          <p className="text-gray-700 text-base">{selectedPlace.telefone}</p>
+          <div className="text-xl font-bold">{selectedPlace.company_name}</div>
+          <div className="text-gray-700 text-base mb-2">{selectedPlace.trade_name}</div>
+          <div className="text-gray-700 text-base">{`${selectedPlace.street}, 
+          ${selectedPlace.number}, ${selectedPlace.neighborhood}, 
+          ${selectedPlace.city}-${selectedPlace.uf}`}</div>
+          <p className="text-gray-700 text-base">{selectedPlace.phone}</p>
         </div>
 
         {selectedPlace.marker_name !== "marques" && (
@@ -41,16 +41,16 @@ export default function PlaceCardInformation() {
             <hr className="my-4" />
 
             <p className="text-gray-700">
-              Início contrato: {selectedPlace.inicio_contrato}
+              Início contrato: {selectedPlace.date_start_contract}
             </p>
             <p className="text-gray-700">
-              Fim contrato: {selectedPlace.fim_contrato}
+              Fim contrato: {selectedPlace.date_end_contract}
             </p>
             <p className="text-gray-700">
-              Valor: R$ {selectedPlace.valor_servico}
+              Valor: R$ {selectedPlace.service_cost}
             </p>
             <p className="text-gray-700">
-              Serviço: {selectedPlace.descricao_servico}
+              Serviço: {selectedPlace.service_description}
             </p>
           </div>
         )}

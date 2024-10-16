@@ -48,7 +48,7 @@ const Map = (Map: MapProps) => {
   const RecenterAutomatically = ({
     latitude,
     longitude,
-    razao_social,
+    company_name,
   }: Places) => {
     const map = useMap();
     useEffect(() => {
@@ -68,7 +68,7 @@ const Map = (Map: MapProps) => {
 
       L.popup()
         .setLatLng([latitude, longitude])
-        .setContent(`${razao_social}`)
+        .setContent(`${company_name}`)
         .openOn(map);
     }, [latitude, longitude]);
     return null;
@@ -117,7 +117,7 @@ const Map = (Map: MapProps) => {
           >
             <Popup>
               <div className="flex flex-col gap-2">
-                {place.nome_fantasia}
+                {place.trade_name}
                 <button
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-blue-700 transition"
                   onClick={() => handleOpenPlaceDetails(place)}

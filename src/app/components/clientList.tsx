@@ -60,7 +60,7 @@ export default function ClientList({ isDisplayingFullWidth }: ClientListProps) {
                 }}
                 className="text-md font-bold"
               >
-                {item.razao_social}
+                {item.company_name}
               </p>
               <p
                 style={{
@@ -69,7 +69,7 @@ export default function ClientList({ isDisplayingFullWidth }: ClientListProps) {
                 }}
                 className="text-sm text-gray-400"
               >
-                {item.logradouro}, {item.cidade}-{item.uf}
+                {item.street}, {item.city}-{item.uf}
               </p>
             </div>
           )}

@@ -68,7 +68,7 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
     const data = await res.json();
 
     const filteredPlaces = data.filter((place: Places) => {
-      const matchesSearch = search ? place.razao_social.toLowerCase().includes(search.toLowerCase()) : true;
+      const matchesSearch = search ? place.company_name.toLowerCase().includes(search.toLowerCase()) : true;
       const matchesMarques = onlyMarques
         ? place.marker_name == "marques"
         : true;
@@ -101,7 +101,7 @@ export function GeomapProvider({ children }: GeomapProviderProps) {
     setSelectedPlace({
       latitude: centerCoordinates[1],
       longitude: centerCoordinates[0],
-      razao_social: selectedGeoJsonCity.properties.name,
+      company_name: selectedGeoJsonCity.properties.name,
       marker_name: "",
     });
 

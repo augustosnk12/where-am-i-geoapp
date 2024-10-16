@@ -1,23 +1,23 @@
 export interface Places {
-    razao_social: string;
-    nome_fantasia?: string;
+    company_name: string;
+    trade_name?: string;
     cnpj?: string;
     cep?: string;
-    logradouro?: string;
-    numero?: number;
-    complemento?: string;
-    bairro?: string;
-    cidade?: string;
+    street?: string;
+    number?: number;
+    additional_address_information?: string;
+    neighborhood?: string;
+    city?: string;
     uf?: string;
-    telefone?: string;
+    phone?: string;
     latitude: number;
     longitude: number;
     isMarques?: boolean;
     marker_name: string;
-    inicio_contrato?: string;
-    fim_contrato?: string;
-    valor_servico?: number;
-    descricao_servico?: string;
+    date_start_contract?: string;
+    date_end_contract?: string;
+    service_cost?: number;
+    service_description?: string;
   }
 
   export interface SelectedCityProps {

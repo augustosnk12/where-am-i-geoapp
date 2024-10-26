@@ -25,7 +25,7 @@ export function SelectCity() {
 
   return (
     <>
-      <div className="absolute sm:top-4 top-24 sm:right-52 right-0 py-1 px-4 cursor-pointer z-[999] flex gap-3 items-center text-gray-600 hover:text-gray-800 transition-all">
+      <div className="absolute sm:top-4 top-24 sm:right-56 right-0 py-1 px-4 cursor-pointer z-[999] flex gap-3 items-center text-gray-600 hover:text-gray-800 transition-all">
         <Select
           className="w-full text-sm border-none outline-none rounded-full"
           styles={{

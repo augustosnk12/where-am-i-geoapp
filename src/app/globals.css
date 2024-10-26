@@ -68,3 +68,8 @@ body {
   background: #555;
   margin-left: 10px;
 }
+
+/* Hide leaflet logo and attribution */
+.leaflet-control-attribution.leaflet-control {
+  display: none;
+}

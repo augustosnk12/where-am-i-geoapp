@@ -16,7 +16,6 @@ import "leaflet-defaulticon-compatibility";
 
 import { useEffect } from "react";
 import { useGeomapContext } from "../../contexts/GeomapContext";
-import { createIcon } from "./functions";
 import geojson from "../../jsonData/geojson-pernambuco.json";
 import { Feature, GeoJSON as GeoJSONProps } from "@/app/interfaces/geojson";
 import CardInformation from "../placeCardInformation";
@@ -105,7 +104,6 @@ const Map = (Map: MapProps) => {
           <Marker
             key={index}
             position={[place.latitude, place.longitude]}
-            icon={createIcon(place.marker_name)}
             riseOnHover
             bubblingMouseEvents
             eventHandlers={{

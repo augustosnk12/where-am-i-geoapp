@@ -8,9 +8,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Marques Geo App",
+  title: "Where am I?",
   description:
-    "Site que exibe os locais onde estão os clientes da Marques Consult",
+    "Where am I? is a website that displays the places where my company operates.",
 };
 
 export default function RootLayout({

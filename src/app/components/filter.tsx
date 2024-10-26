@@ -1,90 +1,74 @@
 "use client";
 
+import Select, { SingleValue } from "react-select";
+import places from "../../app/jsonData/places.json";
 import { useEffect, useState } from "react";
-import { FaFilter } from "react-icons/fa";
-import { LiaTimesSolid } from "react-icons/lia";
-import { IoMdInformationCircleOutline } from "react-icons/io";
-
-import Toggle from "./toggle";
 import { useGeomapContext } from "../contexts/GeomapContext";
-import Tooltip from "./tooltip";
+
+interface SelectInputPlacesProps {
+  value: string;
+  label: string;
+}
 
 export default function Filter() {
-  const [displayFiltersBar, setDisplayFiltersBar] = useState(false);
-  const [isMarquesActive, setIsMarquesActive] = useState(false);
+  const [selectInputPlaces, setSelectInputPlaces] =
+    useState<SelectInputPlacesProps[]>();
 
   const {
-    fetchPlaces,
-    displayMarkers,
-    setDisplayMarkers,
-    setPlaces,
-    setSelectedPlace
+    setSelectedPlace,
+    setOpenPlaceInfoModal,
   } = useGeomapContext();
 
+  function handleSelectCity(
+    event: SingleValue<{
+      value: string;
+      label: string;
+    }>
+  ) {
+    if (event?.value) {
+      const place = places.find(
+        (place) => place.cnpj === event.value
+      );
+
+      if (place) {
+        setSelectedPlace(place);
+        setOpenPlaceInfoModal(true);
+      }
+    } else {
+      setSelectedPlace({} as any);
+    }
+  }
+
   useEffect(() => {
-    setPlaces([]);
-    setSelectedPlace({} as any);
+    const inputPlaces = places.map((place) => ({
+      value: place.cnpj,
+      label: place.company_name,
+    }));
 
-    setTimeout(() => {
-      fetchPlaces({ onlyMarques: isMarquesActive });
-    }, 500);
-
-  }, [isMarquesActive]);
+    setSelectInputPlaces(inputPlaces);
+  }, []);
 
   return (
-    <>
-      <div
-        onClick={() => setDisplayFiltersBar(true)}
-        className="absolute top-5 right-4 bg-white rounded-full py-3 px-4 shadow-xl cursor-pointer z-[999] flex gap-3 items-center text-gray-600 hover:text-gray-800 transition-all"
-      >
-        <FaFilter />
-        <p className="font-semibold text-sm"> Filtros </p>
-      </div>
-
-      <div
-        className={`top-0 right-0 h-[100vh] bg-white flex-col p-4 transition-width duration-300 ease-in-out z-[999] ${
-          displayFiltersBar ? "flex" : " hidden"
-        } ${displayFiltersBar ? "w-[400px]" : "w-0"}`}
-      >
-        <div className="flex-grow">
-          {/* Header */}
-          <div className="flex justify-between w-full items-center">
-            <div className="text-lg font-bold">Filtros</div>
-            <LiaTimesSolid
-              className="text-black cursor-pointer"
-              size={24}
-              onClick={() => setDisplayFiltersBar(false)}
-            />
-          </div>
-
-          {/* Marques toggle */}
-          <div className="mt-8 flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <div className="text-sm font-bold">Marques</div>
-              <Tooltip content="Ao ativar essa opção, apenas os clientes Marques serão exibidos">
-                <IoMdInformationCircleOutline />
-              </Tooltip>
-            </div>
-
-            <Toggle
-              isActive={isMarquesActive}
-              setIsActive={setIsMarquesActive}
-            />
-          </div>
-
-          {/* Display markers */}
-          <div className="mt-8 flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <div className="text-sm font-bold">Exibir marcadores</div>
-              <Tooltip content="Define se deve ou não exibir os marcadores no mapa">
-                <IoMdInformationCircleOutline />
-              </Tooltip>
-            </div>
-
-            <Toggle isActive={displayMarkers} setIsActive={setDisplayMarkers} />
-          </div>
-        </div>
-      </div>
-    </>
+    <div className="absolute top-4 right-0 py-1 px-4 cursor-pointer z-[999] flex gap-3 items-center text-gray-600 hover:text-gray-800 transition-all">
+      <Select
+        className="w-full text-sm border-none outline-none rounded-full"
+        styles={{
+          control: (base) => ({
+            ...base,
+            borderRadius: "18px",
+            padding: "0.2rem",
+            border: "1px solid #E5E5E5",
+            boxShadow:
+              "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+            minWidth: "150px",
+          }),
+        }}
+        onChange={(event) => {
+          handleSelectCity(event as any);
+        }}
+        options={selectInputPlaces}
+        placeholder="Selecionar empresa"
+      ></Select>
+    </div>
   );
 }

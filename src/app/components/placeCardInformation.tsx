@@ -3,6 +3,7 @@ import React from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { useGeomapContext } from "../contexts/GeomapContext";
 import { Poppins } from "@next/font/google";
+import Image from "next/image";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -21,10 +22,12 @@ export default function PlaceCardInformation() {
           <IoCloseCircleOutline className="size-10" color="#000" />
         </button>
 
-        <img
+        <Image
           className="w-full h-48 object-cover"
-          src={"http://via.placeholder.com/600x400"}
+          src={"/city.png"}
           alt={"Image of company" + selectedPlace.company_name}
+          width={600}
+          height={400}
         />
 
         <div className="p-6">
